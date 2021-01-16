@@ -1,20 +1,68 @@
 <div class="masonry-demo">
-	<div class="links">
-		<a href="https://github.com/wynfred/ngx-masonry" target="_blank">View on Github</a>
-		<a class="github-button" href="https://github.com/wynfred/ngx-masonry" data-size="large" data-show-count="true" aria-label="Star wynfred/ngx-masonry on GitHub">Star</a>
-	</div>
+  <div class="links">
+    <a href="https://github.com/wynfred/ngx-masonry" target="_blank"
+      >View on Github</a
+    >
+    <a
+      class="github-button"
+      href="https://github.com/wynfred/ngx-masonry"
+      data-size="large"
+      data-show-count="true"
+      aria-label="Star wynfred/ngx-masonry on GitHub"
+      >Star</a
+    >
+  </div>
   <h1>Ngx Masonry Demo</h1>
 
-  <button *ngIf="limit < 100" (click)="prependImage()">Prepend Image</button>
-  <ngx-masonry [options]="masonryOptions" style="width: 90vw;" [ordered]="true" (itemsLoaded)="itemsLoaded()">
-    <div ngxMasonryItem [prepend]="image[0]" *ngFor="let image of masonryImages;index as idx" style="width: 30%;">
-      <div> {{idx}} </div>
-      <img [src]="image[1]" width="100%">
-    </div>
+  <ng-container *ngIf="masonryOptions.detectImageLoad">
+    <button *ngIf="limit < 100" (click)="prependImage()">Prepend Image</button>
+
+    <button *ngIf="limit < 100" (click)="showMoreImages()">
+      Show More Images
+    </button>
+    <button *ngIf="limit < 100" (click)="insertImage()">Insert Image</button>
+    <button *ngIf="masonryImages" (click)="removeImage()">Remove Image</button>
+  </ng-container>
+
+  <ngx-masonry
+    #masonry
+    [options]="masonryOptions"
+    style="width: 90vw"
+    [ordered]="true"
+    (itemsLoaded)="itemsLoaded(masonry)"
+  >
+    <ng-container *ngIf="masonryOptions.detectImageLoad">
+      <div
+        ngxMasonryItem
+        [prepend]="image[0]"
+        *ngFor="let image of masonryImages; index as idx"
+        style="width: 30%"
+      >
+        <div>{{ idx }}</div>
+        <img [src]="image[1]" width="100%" />
+      </div>
+    </ng-container>
+
+    <!-- image lazyload example -->
+    <ng-container *ngIf="!masonryOptions.detectImageLoad">
+      <div
+        ngxMasonryItem
+        *ngFor="let image of dummyLazyLoadPictures; index as idx"
+        style="width: 20%; overflow: hidden"
+      >
+        <div>{{ idx }}</div>
+        <div class="lazyWrapper" [style.height.px]="image.height">
+          <img
+            class="lazyloadingImage"
+            [src]="image.url"
+            [style.width.px]="image.width"
+            [style.height.px]="image.height"
+            loading="lazy"
+          />
+        </div>
+      </div>
+    </ng-container>
   </ngx-masonry>
 
-  <button *ngIf="limit < 100" (click)="showMoreImages()">Show More Images</button>
-  <button *ngIf="limit < 100" (click)="insertImage()">Insert Image</button>
-  <button *ngIf="masonryImages" (click)="removeImage()">Remove Image</button>
   <h2 *ngIf="limit >= 100">No More Images</h2>
 </div>
