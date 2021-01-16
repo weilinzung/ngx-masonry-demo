@@ -13,12 +13,12 @@ import {
 export class AppComponent implements OnInit {
   private masonry: NgxMasonryComponent;
   public masonryOptions: NgxMasonryOptions = {
-    gutter: 20,
-    detectImageLoad: false,
+    gutter: 20
   };
 
   masonryImages = [];
   limit = 15;
+  lazyLoadDemo: boolean = true;
 
   dummyPictures = [
     [false, "https://source.unsplash.com/433x649/?Uruguay"],
@@ -253,6 +253,10 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.masonryImages = this.dummyPictures.slice(0, this.limit);
+
+    if (this.lazyLoadDemo) {
+      this.masonryOptions.detectImageLoad = false;
+    }
   }
 
   showMoreImages() {
