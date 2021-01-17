@@ -157,7 +157,7 @@ export class AppComponent implements OnInit {
     {
       width: "586",
       height: "1073",
-      url: "https://source.unsplash.com/586x1073/?Bermuda",
+      url: "https://source.unsplash.com/586x673/?Bermuda",
     },
     {
       width: "500",
@@ -182,7 +182,7 @@ export class AppComponent implements OnInit {
     {
       width: "414",
       height: "767",
-      url: "https://source.unsplash.com/414x767/?Sri Lanka",
+      url: "https://source.unsplash.com/414x567/?Sri Lanka",
     },
     {
       width: "443",
@@ -221,7 +221,7 @@ export class AppComponent implements OnInit {
     },
     {
       width: "497",
-      height: "524/",
+      height: "524",
       url: "https://source.unsplash.com/497x524/?Kenya",
     },
     {

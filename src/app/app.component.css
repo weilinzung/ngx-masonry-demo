@@ -1,7 +1,12 @@
 .lazyWrapper {
   position: relative;
-  background-color: white;
-  border: 1px solid gray;
+  overflow: hidden;
+  vertical-align: middle;
+  background-color: rgba(0, 0, 0, 0.15);
+  text-align: center;
+  display: flex;
+  align-items: center;
+  margin: auto;
 }
 
 .lazyWrapper::after {
@@ -20,4 +25,9 @@
 .lazyloadingImage {
   position: relative;
   z-index: 999;
+  max-width: 100%;
+  height: 100%;
+  margin: auto;
+  vertical-align: middle;
+  overflow: hidden;
 }
