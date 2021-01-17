@@ -14,15 +14,7 @@
   </div>
   <h1>Ngx Masonry Demo</h1>
 
-  <ng-container *ngIf="!lazyLoadDemo">
-    <button *ngIf="limit < 100" (click)="prependImage()">Prepend Image</button>
-
-    <button *ngIf="limit < 100" (click)="showMoreImages()">
-      Show More Images
-    </button>
-    <button *ngIf="limit < 100" (click)="insertImage()">Insert Image</button>
-    <button *ngIf="masonryImages" (click)="removeImage()">Remove Image</button>
-  </ng-container>
+  <button *ngIf="limit < 100" (click)="prependImage()">Prepend Image</button>
 
   <ngx-masonry
     #masonry
@@ -31,7 +23,8 @@
     [ordered]="true"
     (itemsLoaded)="itemsLoaded(masonry)"
   >
-    <ng-container *ngIf="!lazyLoadDemo">
+    <!-- normal example -->
+    <ng-container *ngIf="!lazyNonImageDemo">
       <div
         ngxMasonryItem
         [prepend]="image[0]"
@@ -43,21 +36,42 @@
       </div>
     </ng-container>
 
-    <!-- image lazyload example -->
-    <ng-container *ngIf="lazyLoadDemo">
+    <!-- Image lazyload example -->
+    <!-- <ng-container *ngIf="lazyNonImageDemo">
       <div
         ngxMasonryItem
-        *ngFor="let image of dummyLazyLoadPictures; index as idx"
-        style="height: auto; min-width: 30%; max-width: 30%;"
+        [prepend]="image[0]"
+        [prepend]="image.prepend"
+        *ngFor="let image of masonryImages; index as idx"
+        style="height: auto; min-width: 30%; max-width: 30%"
       >
         <div>{{ idx }}</div>
-        <div class="lazyWrapper" [style.height.px]="image.height">
+        <div class="lazyWrapper" [style.height.px]="image[2].height">
           <img
             loading="lazy"
             class="lazyloadingImage"
-            [style.width.px]="image.width"
-            [src]="image.url"
+            [style.width.px]="image[2].width"
+            [src]="image[1]"
           />
+        </div>
+      </div>
+    </ng-container> -->
+
+    <!-- Non-image tag example -->
+    <ng-container *ngIf="lazyNonImageDemo">
+      <div
+        ngxMasonryItem
+        [prepend]="image[0]"
+        *ngFor="let image of masonryImages; index as idx"
+        style="min-width: 30%; max-width: 30%; overflow: hidden"
+        [style.height.px]="image[2].height"
+      >
+        <div>{{ idx }}</div>
+        <div class="bgWrapper">
+          <div
+            class="bgItem"
+            [ngStyle]="{ 'background-image': 'url(' + image[1] + ')' }"
+          ></div>
         </div>
       </div>
     </ng-container>
@@ -65,3 +79,7 @@
 
   <h2 *ngIf="limit >= 100">No More Images</h2>
 </div>
+
+<button *ngIf="limit < 100" (click)="showMoreImages()">Show More Images</button>
+<button *ngIf="limit < 100" (click)="insertImage()">Insert Image</button>
+<button *ngIf="masonryImages" (click)="removeImage()">Remove Image</button>
