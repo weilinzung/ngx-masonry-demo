@@ -18,9 +18,9 @@ export class AppComponent implements OnInit {
 
   masonryImages = [];
   limit = 15;
-  lazyNonImageDemo = true;
+  imageLazyDemo = true;
 
-  // width & height properties for each item is only using for lazyload or non-image tag method
+  // width & height properties for each item is only using for lazyload method with `masonryLazy` attribute
   dummyPictures = [
     [
       false,
@@ -192,10 +192,6 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.masonryImages = this.dummyPictures.slice(0, this.limit);
-
-    if (this.lazyNonImageDemo) {
-      this.masonryOptions.detectImageLoad = false;
-    }
   }
 
   showMoreImages() {

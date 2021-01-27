@@ -24,7 +24,7 @@
     (itemsLoaded)="itemsLoaded(masonry)"
   >
     <!-- normal example -->
-    <ng-container *ngIf="!lazyNonImageDemo">
+    <ng-container *ngIf="!imageLazyDemo">
       <div
         ngxMasonryItem
         [prepend]="image[0]"
@@ -37,7 +37,7 @@
     </ng-container>
 
     <!-- Image lazyload example -->
-    <!-- <ng-container *ngIf="lazyNonImageDemo">
+    <ng-container *ngIf="imageLazyDemo">
       <div
         ngxMasonryItem
         [prepend]="image[0]"
@@ -48,30 +48,12 @@
         <div>{{ idx }}</div>
         <div class="lazyWrapper" [style.height.px]="image[2].height">
           <img
+            masonryLazy
             loading="lazy"
             class="lazyloadingImage"
             [style.width.px]="image[2].width"
             [src]="image[1]"
           />
-        </div>
-      </div>
-    </ng-container> -->
-
-    <!-- Non-image tag example -->
-    <ng-container *ngIf="lazyNonImageDemo">
-      <div
-        ngxMasonryItem
-        [prepend]="image[0]"
-        *ngFor="let image of masonryImages; index as idx"
-        style="min-width: 30%; max-width: 30%; overflow: hidden"
-        [style.height.px]="image[2].height"
-      >
-        <div>{{ idx }}</div>
-        <div class="bgWrapper">
-          <div
-            class="bgItem"
-            [ngStyle]="{ 'background-image': 'url(' + image[1] + ')' }"
-          ></div>
         </div>
       </div>
     </ng-container>
